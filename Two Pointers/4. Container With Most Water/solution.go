@@ -1,3 +1,11 @@
+func Max(x, y int) int {
+	if x >= y {
+		return x
+	}
+
+	return y
+}
+
 func maxArea(height []int) int {
 	size := len(height)
 	left, right := 0, size-1
