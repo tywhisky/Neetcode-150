@@ -4,18 +4,17 @@
   */
 object Solution {
   def goodNodes(root: TreeNode): Int = {
-    var result: Int = 0
-    def dfs(node: TreeNode, currMax: Int): Unit = {
-      if (node == null) return
-      var newMax = currMax
-      if (node.value >= currMax) {
-        result += 1
-        newMax = node.value
+    def dfs(node: TreeNode, maxVal: Int): Int = {
+      if (node == null) 0
+      else {
+        val newMax = maxVal.max(node.value)
+        val leftCount = dfs(node.left, newMax)
+        val rightCount = dfs(node.right, newMax)
+        if (node.value >= maxVal) leftCount + rightCount + 1
+        else leftCount + rightCount
       }
-      dfs(node.left, newMax)
-      dfs(node.right, newMax)
     }
-    dfs(root, 0)
-    result
+    dfs(root, Int.MinValue)
+
   }
 }
